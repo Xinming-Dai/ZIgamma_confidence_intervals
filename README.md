@@ -1,6 +1,6 @@
 # ZIgamma_confidence_intervals
 
-This repository contains simulation functions, simulation results, plots for the paper—Confidence Intervals for Coefficients of Variance of Zero-inflated Gamma Distribution (Xinming Dai).
+This repository contains simulation functions, simulation results, and plots for the paper—Confidence Intervals for Coefficients of Variance of Zero-inflated Gamma Distribution (Xinming Dai).
 
 ## Abstract
 
