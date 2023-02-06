@@ -6,4 +6,4 @@ Code for "Confidence Interval for Coefficients of Variation of Zero-Inflated Gam
 
 2. simulation_function.R contains `simu` function to calculate coverage probabilities, average lengths, lower errors, and upper errors of the four methods in the mean time. simulation.R `simu` called function in simulation_function.R to simulate.
 
-3. computation_time_simulation.R is for calculate time spent of the four methods.
+3. computation_time_simulation.R is for calculate time expense of the four methods.
