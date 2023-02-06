@@ -3,6 +3,12 @@
 source('functions/zigamma_data.R')
 
 gam.mles= function(x){
+  # Args:
+  # x: sample
+  
+  # Returns:
+  # ah: alpha hat. the mle of alpha
+  # bh: beta hat. the mle of beta
   n1= length(x)
   xb = mean(x)
   xd = mean(log(x))
@@ -46,6 +52,17 @@ ci_.pb<-function(nr, data, cl){
 }
 # the difference of CVs
 ci.pb = function(zigamma1, zigamma2, nr, alpha){
+  # use bootstrap method to obtain the confidence interval
+  
+  # Args:
+  # zigamma1: 1st sample
+  # zigamma2: 2nd sample
+  # nr: number of resample size
+  # alpha: significance level
+  
+  # Returns:
+  # lower: the lower bound of the confidence interval
+  # upper: the upper bound of the confidence interval
   cl = 1-alpha
   CI1 = ci_.pb(nr, zigamma1, cl)
   CI2 = ci_.pb(nr, zigamma2, cl)

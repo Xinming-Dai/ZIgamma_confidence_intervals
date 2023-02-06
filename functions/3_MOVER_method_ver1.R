@@ -1,13 +1,12 @@
 # This is the simulation of MOVER method.
-# Ver3. CIs of a were constructed by Fiducial method.
-# The estimator of a is constructed by MLE /////losed-form estimation from 【Gamma distribution - Wikipedia】.
+# CIs of alpha were constructed by Fiducial method.
+# The estimator of a is constructed by MLE. losed-form estimation from 【Gamma distribution - Wikipedia】.
 # ci.mover1 is the confidence interval function
 
 library(EnvStats)
 source('functions/zigamma_data.R')
 
 # CI of a, which was constructed by Fiducial method.
-
 a.ci = function(zigamma, nr, alpha){
   ni1 = zigamma$ni1
   zigdata1 = zigamma$zigdata1
@@ -55,6 +54,16 @@ cv.ci1 = function (zigamma, alpha){
 # the confidence interval of the difference of CVs
 ci.mover1 = function(zigamma1, zigamma2, alpha){
   # utilize MOEVR to construct the confidence interval of the difference of CVs
+  
+  # Args:
+  # zigamma1: 1st sample
+  # zigamma2: 2nd sample
+  # nr: number of resample size
+  # alpha: significance level
+  
+  # Returns:
+  # lower: the lower bound of the confidence interval
+  # upper: the upper bound of the confidence interval
   
   ci1 = cv.ci1(zigamma1, alpha); l1 = ci1$lower; u1 = ci1$upper
   ci2 = cv.ci1(zigamma2, alpha); l2 = ci2$lower; u2 = ci2$upper

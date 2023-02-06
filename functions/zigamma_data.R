@@ -15,9 +15,9 @@ zig = function(data){
 
 #-----------generate data from zero inflated gamma distribution---------------
 rzigamma = function(n,delta,shape,scale){
-  #n is the sample size.
-  #delta is the proportion of 0 in binomial distribution.
-  ni0=rbinom(1,n,prob=delta) #the prob of zeros which are generated using this way.
+  # n is the sample size.
+  # delta is the proportion of 0 in binomial distribution.
+  ni0=rbinom(1,n,prob=delta) # the prob of zeros which are generated using this way.
   ni1=n-ni0
   bdata=array(0,dim = ni0)
   gdata=rgamma(n=ni1,shape=shape,scale=scale)

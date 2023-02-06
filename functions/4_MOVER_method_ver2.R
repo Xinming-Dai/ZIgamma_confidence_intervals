@@ -1,11 +1,10 @@
 # This is the simulation of MOVER method.
-# Ver2. CIs of scale parameters, a, were constructed by Score CI【3-2.1】.
+# CIs of scale parameters, a, were constructed by Score CI【3-2.1】.
 # ci.mover2 is the confidence interval function
 
 library(EnvStats) # MLE of gamma
 source('functions/zigamma_data.R')
 
-# alpha = 0.05; zigamma = zigamma1
 # CI for CV of gammma which was constructed by Score CI.
 CV2.ci = function(zigamma, alpha){
   ni1 = zigamma$ni1; x = zigamma$zigdata1
@@ -62,6 +61,16 @@ cv.ci2 = function (zigamma, alpha){
 # the confidence interval of the difference of CVs
 ci.mover2 = function(zigamma1, zigamma2, alpha){
   # utilize MOEVR to construct the confidence interval of the difference of CVs
+  
+  # Args:
+  # zigamma1: 1st sample
+  # zigamma2: 2nd sample
+  # nr: number of resample size
+  # alpha: significance level
+  
+  # Returns:
+  # lower: the lower bound of the confidence interval
+  # upper: the upper bound of the confidence interval
   
   ci1 = cv.ci2(zigamma1, alpha); l1 = ci1$lower; u1 = ci1$upper
   ci2 = cv.ci2(zigamma2, alpha); l2 = ci2$lower; u2 = ci2$upper

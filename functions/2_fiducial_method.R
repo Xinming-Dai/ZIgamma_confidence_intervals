@@ -28,6 +28,18 @@ Gmygamma = function(GFQzig1, GFQzig2){
 }
 
 ci.f = function(zigamma1,zigamma2,nr,alpha){
+  # use fiducial method to obtain the confidence interval
+  
+  # Args:
+  # zigamma1: 1st sample
+  # zigamma2: 2nd sample
+  # nr: number of resample size
+  # alpha: significance level
+  
+  # Returns:
+  # lower: the lower bound of the confidence interval
+  # upper: the upper bound of the confidence interval
+  
   #GFQ of gamma (=CV1-CV2)
   GFQzig1=GFQzig(zigamma1$ni0,zigamma1$ni1,zigamma1$zigdata1,nr=nr)
   GFQzig2=GFQzig(zigamma2$ni0,zigamma2$ni1,zigamma2$zigdata1,nr=nr)
