@@ -1,10 +1,14 @@
 source('functions/zigamma_data.R')
+source('functions/1_bootstrap_method.R')
+source('functions/2_fiducial_method.R')
+source('functions/3_MOVER_method_ver1.R')
+source('functions/4_MOVER_method_ver2.R')
 
 #--------simu----------
 # simu contains all four methods
 simu = function(n1, delta1, a1, b1, n2, delta2, a2, b2, trial,alpha){
   
-  p_pb = 0; len_pb = 0; le_pb = 0; ue_pb = 0
+  p_bootstrap = 0; len_bootstrap = 0; le_bootstrap = 0; ue_bootstrap = 0
   p_f = 0; len_f = 0; le_f = 0; ue_f = 0
   p_m1 = 0; len_m1 = 0; le_m1 = 0; ue_m1 = 0
   p_m2 = 0; len_m2 = 0; le_m2 = 0; ue_m2 = 0
@@ -16,15 +20,15 @@ simu = function(n1, delta1, a1, b1, n2, delta2, a2, b2, trial,alpha){
     zigamma1 = rzigamma(n = n1, delta = delta1, shape = a1, scale = b1)
     zigamma2 = rzigamma(n = n2, delta = delta2, shape = a2, scale = b2)
     
-    # PB
-    dci_pb = ci.pb(zigamma1, zigamma2, nr=1000, alpha)
-    l_pb = dci_pb$lower
-    u_pb = dci_pb$upper  
+    # bootstrap
+    dci_bootstrap = ci.pb(zigamma1, zigamma2, nr=1000, alpha)
+    l_bootstrap = dci_bootstrap$lower
+    u_bootstrap = dci_bootstrap$upper  
     
-    len_pb = len_pb+(u_pb-l_pb)
-    if(l_pb <= CV & CV <= u_pb) {p_pb = p_pb+1} # coverage_probability
-    if(CV < l_pb) {le_pb = le_pb+1} # lower_error_probability 
-    if(CV > u_pb) {ue_pb = ue_pb+1} # upper_error_probability
+    len_bootstrap = len_bootstrap+(u_bootstrap-l_bootstrap)
+    if(l_bootstrap <= CV & CV <= u_bootstrap) {p_bootstrap = p_bootstrap+1} # coverage_probability
+    if(CV < l_bootstrap) {le_bootstrap = le_bootstrap+1} # lower_error_probability 
+    if(CV > u_bootstrap) {ue_bootstrap = ue_bootstrap+1} # upper_error_probability
     
     # Fiducial
     dci_f=ci.f(zigamma1,zigamma2,nr=10000,alpha=alpha)
@@ -57,11 +61,11 @@ simu = function(n1, delta1, a1, b1, n2, delta2, a2, b2, trial,alpha){
     if(CV > u_m2) {ue_m2 = ue_m2+1} # upper_error_probability
   }
   
-  # pb
-  cp_pb = p_pb/trial
-  al_pb = len_pb/trial # average length
-  l_pb = le_pb/trial
-  u_pb = ue_pb/trial
+  # bootstrap
+  cp_bootstrap = p_bootstrap/trial
+  al_bootstrap = len_bootstrap/trial # average length
+  l_bootstrap = le_bootstrap/trial
+  u_bootstrap = ue_bootstrap/trial
   
   # fiducial
   cp_f = p_f/trial
@@ -83,10 +87,10 @@ simu = function(n1, delta1, a1, b1, n2, delta2, a2, b2, trial,alpha){
 
   
   return(c(n1 = n1, n2 = n2, delta1 = delta1, delta2 = delta2, a1 = a1, a2 = a2,
-           cp_pb = cp_pb,
-           al_pb = al_pb,
-           l_pb = l_pb,
-           u_pb = u_pb,
+           cp_bootstrap = cp_bootstrap,
+           al_bootstrap = al_bootstrap,
+           l_bootstrap = l_bootstrap,
+           u_bootstrap = u_bootstrap,
            cp_f = cp_f,
            al_f = al_f,
            l_f = l_f,
